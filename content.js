@@ -302,9 +302,25 @@ class PrompterContent {
                 this.insertAskMeFirstTemplate();
                 break;
             case 'library':
-                // Open extension popup
-                chrome.runtime.sendMessage({ action: 'openPopup' });
+                // Open extension popup or side panel
+                this.openTemple();
                 break;
+        }
+    }
+
+    async openTemple() {
+        try {
+            // Try to open side panel
+            const response = await chrome.runtime.sendMessage({ action: 'openSidePanel' });
+            if (chrome.runtime.lastError) {
+                console.warn('[Prompter] Extension context invalidated, please reload the page');
+                this.showNotification('Please reload the page to use this feature', 'warning');
+            }
+        } catch (error) {
+            console.error('[Prompter] Failed to open temple:', error);
+            if (error.message.includes('Extension context invalidated')) {
+                this.showNotification('Extension was updated. Please reload the page.', 'warning');
+            }
         }
     }
 

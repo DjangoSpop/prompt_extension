@@ -3,14 +3,68 @@
  * Temple of Wisdom Side Panel Controller
  */
 
-import { HistoryApiClient, getErrorMessage, emitTelemetry } from './frontend/lib/api/history.js';
-import { ExtensionTokenStorage } from './frontend/utils/tokenStorage.js';
-import { OfflineQueue } from './frontend/utils/offlineQueue.js';
+// Note: This is a standalone version without external dependencies
+// The full API integration will be added once the TypeScript modules are compiled
 
-// Initialize
-const tokenStorage = new ExtensionTokenStorage();
-const apiClient = new HistoryApiClient(tokenStorage);
-const offlineQueue = new OfflineQueue(apiClient);
+// Temporary mock implementations until full API integration
+const tokenStorage = {
+  async getAccessToken() {
+    const result = await chrome.storage.local.get(['jwt_access_token']);
+    return result.jwt_access_token || null;
+  },
+  async getRefreshToken() {
+    const result = await chrome.storage.local.get(['jwt_refresh_token']);
+    return result.jwt_refresh_token || null;
+  },
+  async setTokens(access, refresh) {
+    await chrome.storage.local.set({
+      jwt_access_token: access,
+      jwt_refresh_token: refresh
+    });
+  },
+  async clearTokens() {
+    await chrome.storage.local.remove(['jwt_access_token', 'jwt_refresh_token']);
+  }
+};
+
+// Simple API client mock
+const apiClient = {
+  async list(params) {
+    // TODO: Replace with actual API call
+    console.log('API call: list', params);
+    return {
+      count: 0,
+      next: null,
+      previous: null,
+      results: []
+    };
+  },
+  async create(data) {
+    console.log('API call: create', data);
+    return { id: 'mock-id', ...data };
+  },
+  async delete(id) {
+    console.log('API call: delete', id);
+  },
+  async enhance(id, request) {
+    console.log('API call: enhance', id, request);
+    return {
+      optimized_prompt: 'Enhanced version of the prompt...',
+      model: request.model,
+      tokens: 150,
+      credits_spent: 0.10
+    };
+  }
+};
+
+function getErrorMessage(error) {
+  if (error instanceof Error) return error.message;
+  return String(error);
+}
+
+function emitTelemetry(event, data) {
+  console.log('[Telemetry]', event, data);
+}
 
 // State
 let currentPage = 1;

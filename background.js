@@ -188,6 +188,22 @@ class PrompterBackground {
                     sendResponse({ enhanced });
                     break;
 
+                case 'openSidePanel':
+                    // Open the side panel
+                    try {
+                        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+                        if (tab) {
+                            await chrome.sidePanel.open({ windowId: tab.windowId });
+                            sendResponse({ success: true });
+                        } else {
+                            sendResponse({ success: false, error: 'No active tab found' });
+                        }
+                    } catch (error) {
+                        console.error('Failed to open side panel:', error);
+                        sendResponse({ success: false, error: error.message });
+                    }
+                    break;
+
                 case 'getAnalytics':
                     const analytics = await this.getAnalyticsData();
                     sendResponse({ analytics });
