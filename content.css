@@ -1,0 +1,593 @@
+/* Prompter Extension - Content Script Styles */
+
+/* Floating Action Button (FAB) */
+#prompter-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.prompter-fab-button {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    font-size: 20px;
+    user-select: none;
+}
+
+.prompter-fab-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.prompter-fab-button:active {
+    transform: translateY(0);
+}
+
+/* FAB Menu */
+.prompter-fab-menu {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    padding: 8px;
+    display: none;
+    animation: fadeInUp 0.2s ease;
+    border: 1px solid #e9ecef;
+}
+
+.prompter-fab-menu::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 24px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+}
+
+.prompter-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.prompter-menu-item:hover {
+    background: #f8f9ff;
+    color: #667eea;
+}
+
+.prompter-menu-item .icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Prompt Suggestions */
+#prompter-suggestions {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    width: 90vw;
+    max-height: 400px;
+    z-index: 10000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    animation: fadeIn 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.prompter-suggestions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    background: #f8f9fa;
+    border-radius: 16px 16px 0 0;
+}
+
+.close-suggestions {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.close-suggestions:hover {
+    background: #e9ecef;
+}
+
+.prompter-suggestions-list {
+    padding: 16px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.suggestion-item:last-child {
+    margin-bottom: 0;
+}
+
+.suggestion-text {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    margin-right: 12px;
+}
+
+.use-suggestion {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.use-suggestion:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
+}
+
+/* Quick Template Menu */
+#prompter-quick-menu {
+    position: fixed;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    z-index: 10000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    animation: fadeInUp 0.2s ease;
+    border: 1px solid #e9ecef;
+    min-width: 220px;
+}
+
+.quick-menu-header {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #333;
+    font-size: 14px;
+}
+
+.quick-menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.quick-menu-options button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.quick-menu-options button:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+    color: #667eea;
+}
+
+/* Notifications */
+.prompter-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10001;
+    animation: slideInRight 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 300px;
+}
+
+.prompter-notification-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.prompter-notification-error {
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+}
+
+.prompter-notification-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #6f42c1 100%);
+}
+
+/* Enhanced Input Styling */
+.prompter-enhanced-input {
+    position: relative;
+}
+
+.prompter-enhanced-input::after {
+    content: '✨ Enhanced by Prompter';
+    position: absolute;
+    top: -25px;
+    right: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    z-index: 1000;
+}
+
+/* Auto-completion indicator */
+.prompter-input-indicator {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background: #28a745;
+    border-radius: 50%;
+    z-index: 1000;
+    animation: pulse 2s infinite;
+}
+
+/* Pulse animation for active indicator */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #prompter-fab {
+        bottom: 80px; /* Avoid mobile browser UI */
+        right: 16px;
+    }
+    
+    .prompter-fab-button {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+    }
+    
+    .prompter-fab-menu {
+        bottom: 60px;
+        right: 0;
+        min-width: 180px;
+    }
+    
+    #prompter-suggestions {
+        width: 95vw;
+        max-height: 80vh;
+    }
+    
+    .prompter-notification {
+        top: 10px;
+        right: 10px;
+        max-width: calc(100vw - 20px);
+    }
+    
+    #prompter-quick-menu {
+        min-width: 200px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .prompter-fab-menu,
+    #prompter-suggestions,
+    #prompter-quick-menu {
+        background: #2d2d2d;
+        border-color: #444;
+        color: #fff;
+    }
+    
+    .prompter-suggestions-header {
+        background: #333;
+        border-bottom-color: #444;
+        color: #fff;
+    }
+    
+    .prompter-menu-item {
+        color: #fff;
+    }
+    
+    .prompter-menu-item:hover {
+        background: #444;
+        color: #667eea;
+    }
+    
+    .suggestion-item {
+        border-color: #444;
+        background: #2d2d2d;
+    }
+    
+    .suggestion-item:hover {
+        background: #333;
+        border-color: #667eea;
+    }
+    
+    .suggestion-text {
+        color: #fff;
+    }
+    
+    .quick-menu-options button {
+        background: #2d2d2d;
+        border-color: #444;
+        color: #fff;
+    }
+    
+    .quick-menu-options button:hover {
+        background: #333;
+    }
+    
+    .close-suggestions:hover {
+        background: #444;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .prompter-fab-button {
+        background: #000;
+        border: 2px solid #fff;
+    }
+    
+    .prompter-fab-menu,
+    #prompter-suggestions,
+    #prompter-quick-menu {
+        border: 2px solid #000;
+    }
+    
+    .prompter-menu-item:hover,
+    .suggestion-item:hover,
+    .quick-menu-options button:hover {
+        background: #000;
+        color: #fff;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .prompter-fab-button,
+    .prompter-menu-item,
+    .suggestion-item,
+    .quick-menu-options button,
+    .use-suggestion {
+        transition: none;
+    }
+    
+    .prompter-notification,
+    #prompter-suggestions,
+    .prompter-fab-menu,
+    #prompter-quick-menu {
+        animation: none;
+    }
+    
+    .prompter-input-indicator {
+        animation: none;
+    }
+}
+
+/* Print styles - hide all Prompter UI when printing */
+@media print {
+    #prompter-fab,
+    #prompter-suggestions,
+    #prompter-quick-menu,
+    .prompter-notification {
+        display: none !important;
+    }
+}
+
+/* Focus management for accessibility */
+.prompter-menu-item:focus,
+.use-suggestion:focus,
+.quick-menu-options button:focus,
+.close-suggestions:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Ensure proper stacking context */
+#prompter-fab,
+#prompter-suggestions,
+#prompter-quick-menu,
+.prompter-notification {
+    isolation: isolate;
+}
+
+/* Smooth scrolling in suggestions */
+.prompter-suggestions-list {
+    scroll-behavior: smooth;
+}
+
+.prompter-suggestions-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.prompter-suggestions-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.prompter-suggestions-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.prompter-suggestions-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Loading states */
+.prompter-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.prompter-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Tooltip styles */
+.prompter-tooltip {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10002;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.prompter-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(0, 0, 0, 0.9);
+}
+
+.prompter-fab-button:hover .prompter-tooltip {
+    opacity: 1;
+}

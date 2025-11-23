@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background Circle with Gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="sparkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd93d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow Effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main Background Circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#bgGradient)"/>
+  
+  <!-- Neural Network Pattern -->
+  <g opacity="0.3" stroke="#ffffff" stroke-width="1" fill="none">
+    <line x1="30" y1="40" x2="50" y2="35"/>
+    <line x1="50" y1="35" x2="70" y2="40"/>
+    <line x1="70" y1="40" x2="85" y2="30"/>
+    <line x1="30" y1="60" x2="50" y2="65"/>
+    <line x1="50" y1="65" x2="70" y2="60"/>
+    <line x1="70" y1="60" x2="85" y2="70"/>
+    <circle cx="30" cy="40" r="2" fill="#ffffff"/>
+    <circle cx="50" cy="35" r="2" fill="#ffffff"/>
+    <circle cx="70" cy="40" r="2" fill="#ffffff"/>
+    <circle cx="85" cy="30" r="2" fill="#ffffff"/>
+    <circle cx="30" cy="60" r="2" fill="#ffffff"/>
+    <circle cx="50" cy="65" r="2" fill="#ffffff"/>
+    <circle cx="70" cy="60" r="2" fill="#ffffff"/>
+    <circle cx="85" cy="70" r="2" fill="#ffffff"/>
+  </g>
+  
+  <!-- Central Lightning Bolt (Prompt Symbol) -->
+  <g transform="translate(64, 64)">
+    <path d="M -8,-25 L -2,-5 L -10,-5 L 8,25 L 2,5 L 10,5 Z" 
+          fill="#ffffff" 
+          stroke="#ffffff" 
+          stroke-width="2" 
+          stroke-linejoin="round"
+          filter="url(#glow)"/>
+  </g>
+  
+  <!-- Sparkle Effects -->
+  <g fill="url(#sparkGradient)" opacity="0.8">
+    <g transform="translate(35, 35)">
+      <path d="M 0,-6 L 2,0 L 0,6 L -2,0 Z"/>
+      <path d="M -6,0 L 0,-2 L 6,0 L 0,2 Z"/>
+    </g>
+    <g transform="translate(90, 45) scale(0.7)">
+      <path d="M 0,-6 L 2,0 L 0,6 L -2,0 Z"/>
+      <path d="M -6,0 L 0,-2 L 6,0 L 0,2 Z"/>
+    </g>
+    <g transform="translate(85, 85) scale(0.5)">
+      <path d="M 0,-6 L 2,0 L 0,6 L -2,0 Z"/>
+      <path d="M -6,0 L 0,-2 L 6,0 L 0,2 Z"/>
+    </g>
+  </g>
+  
+  <!-- Bottom Text Badge -->
+  <rect x="38" y="95" width="52" height="18" rx="9" fill="#ffffff" opacity="0.9"/>
+  <text x="64" y="107" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#764ba2">FORGE</text>
+</svg>

@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "PromptForge - LLM Optimizer",
+  "version": "1.0.0",
+  "description": "Transform simple prompts into sophisticated LLM queries with one click",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://bard.google.com/*",
+    "https://gemini.google.com/*",
+    "https://poe.com/*",
+    "https://*.openai.com/*",
+    "https://*.anthropic.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://bard.google.com/*",
+        "https://gemini.google.com/*",
+        "https://poe.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["prompts.json", "methodologies.json", "templates/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

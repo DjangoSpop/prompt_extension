@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompter</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 350px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .header {
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .tagline {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+    
+    .content {
+      background: white;
+      border-radius: 16px 16px 0 0;
+      padding: 20px;
+      min-height: 400px;
+    }
+    
+    .quick-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .stat-card {
+      text-align: center;
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 8px;
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #374151;
+    }
+    
+    .stat-label {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    
+    .action-buttons {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .btn {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #374151;
+    }
+    
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+    
+    .settings-section {
+      margin-bottom: 20px;
+    }
+    
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 12px;
+    }
+    
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+    }
+    
+    .setting-label {
+      font-size: 13px;
+      color: #4b5563;
+    }
+    
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #cbd5e1;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+    
+    .complexity-selector {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .complexity-btn {
+      padding: 6px;
+      border: 1px solid #d1d5db;
+      background: white;
+      border-radius: 6px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .complexity-btn:hover {
+      background: #f3f4f6;
+    }
+    
+    .complexity-btn.active {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-color: transparent;
+    }
+    
+    .footer {
+      padding: 16px 20px;
+      background: #f9fafb;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .footer-link {
+      color: #6b7280;
+      font-size: 12px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .footer-link:hover {
+      color: #667eea;
+    }
+    
+    .test-mode-banner {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: white;
+      padding: 8px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    .test-mode-banner:hover {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <span>⚡</span>
+      <span>PromptForge</span>
+    </div>
+    <div class="tagline">Transform simple prompts into genius outputs</div>
+  </div>
+  
+  <div class="test-mode-banner" id="testModeBanner">
+    🧪 Test Mode Available - Click to Test Prompts
+  </div>
+  
+  <div class="content">
+    <div class="quick-stats">
+      <div class="stat-card">
+        <div class="stat-value" id="statOptimized">0</div>
+        <div class="stat-label">Optimized</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statTime">0h</div>
+        <div class="stat-label">Time Saved</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statWow">0</div>
+        <div class="stat-label">Wow Score</div>
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <button class="btn btn-primary" id="optimizeBtn">
+        <span>🚀</span>
+        <span>Optimize Current Prompt</span>
+      </button>
+      <button class="btn btn-secondary" id="geniusBtn">
+        <span>🧠</span>
+        <span>Activate Genius Mode</span>
+      </button>
+    </div>
+    
+    <div class="settings-section">
+      <div class="section-title">Quick Settings</div>
+      
+      <div class="setting-row">
+        <span class="setting-label">Auto-Optimize</span>
+        <label class="toggle">
+          <input type="checkbox" id="autoOptimize">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="setting-row">
+        <span class="setting-label">Animated Completion</span>
+        <label class="toggle">
+          <input type="checkbox" id="animatedCompletion" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="setting-row">
+        <span class="setting-label">Keyboard Shortcuts</span>
+        <label class="toggle">
+          <input type="checkbox" id="shortcuts" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="settings-section">
+      <div class="section-title">Complexity Level</div>
+      <div class="complexity-selector">
+        <button class="complexity-btn" data-level="basic">Basic</button>
+        <button class="complexity-btn active" data-level="pro">Pro</button>
+        <button class="complexity-btn" data-level="expert">Expert</button>
+        <button class="complexity-btn" data-level="genius">Genius</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <a href="#" class="footer-link" id="helpLink">Help</a>
+    <a href="#" class="footer-link" id="settingsLink">Settings</a>
+    <a href="#" class="footer-link" id="upgradeLink">Upgrade</a>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

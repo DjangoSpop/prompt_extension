@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Prompter - Transform Your AI Prompts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .welcome-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .welcome-header p {
+            font-size: 1.4em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 16px;
+            background: #f8f9ff;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .demo-video {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .prompt-example {
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .prompt-example.before {
+            background: #fff5f5;
+            border-color: #fed7d7;
+        }
+
+        .prompt-example.after {
+            background: #f0fff4;
+            border-color: #c6f6d5;
+        }
+
+        .prompt-label {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .prompt-label.before {
+            color: #e53e3e;
+        }
+
+        .prompt-label.after {
+            color: #38a169;
+        }
+
+        .prompt-text {
+            font-family: monospace;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.3em;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .trial-info {
+            background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
+            color: #333;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            border: 2px solid #e9ecef;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.popular {
+            border-color: #28a745;
+            position: relative;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price {
+            font-size: 3em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .pricing-card .price span {
+            font-size: 0.4em;
+            color: #666;
+        }
+
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .features-list li:before {
+            content: "✅";
+            margin-right: 10px;
+        }
+
+        .setup-steps {
+            background: #f8f9ff;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5em;
+            margin: 0 auto 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5em;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-header h1 {
+                font-size: 2.5em;
+            }
+
+            .content-section {
+                padding: 40px 20px;
+            }
+
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="welcome-header">
+            <div class="logo">🚀</div>
+            <h1>Welcome to Prompter!</h1>
+            <p>Transform your lazy AI prompts into powerful instructions that get amazing results</p>
+        </header>
+
+        <section class="content-section">
+            <h2 style="text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #333;">Stop Getting Mediocre AI Responses</h2>
+            <p style="text-align: center; font-size: 1.3em; color: #666; max-width: 800px; margin: 0 auto 40px;">The problem isn't ChatGPT, Claude, or Bard. It's your prompts! Prompter transforms your one-liner questions into comprehensive, results-driven instructions.</p>
+
+            <div class="before-after">
+                <div class="prompt-example before">
+                    <div class="prompt-label before">❌ Typical Lazy Prompt</div>
+                    <div class="prompt-text">help me with marketing</div>
+                </div>
+                <div class="prompt-example after">
+                    <div class="prompt-label after">✅ Prompter Enhanced</div>
+                    <div class="prompt-text">I need help developing a marketing strategy. Before you respond, please ask me about:
+
+- My target audience and their demographics
+- My product/service and unique value proposition  
+- My budget and timeline constraints
+- My current marketing channels and performance
+- My specific goals and success metrics
+
+Then provide a comprehensive marketing plan that includes:
+1. Target audience analysis
+2. Positioning strategy
+3. Channel recommendations with budget allocation
+4. Content strategy and timeline
+5. KPIs and measurement approach
+
+Please structure your response with clear sections and actionable next steps.</div>
+                </div>
+            </div>
+
+            <div class="trial-info">
+                🎉 <strong>Start Your FREE 15-Day Trial</strong> - Full access to all features, no credit card required!
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>One-Click Enhancement</h3>
+                    <p>Transform any prompt instantly with our smart enhancement engine that adds context, structure, and specificity.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📚</span>
+                    <h3>Template Library</h3>
+                    <p>50+ proven templates including Chain of Thought, Step-by-Step guides, and professional frameworks.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💾</span>
+                    <h3>Personal Vault</h3>
+                    <p>Save and organize your best prompts. Build a library of winning AI interactions you can reuse.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌐</span>
+                    <h3>Works Everywhere</h3>
+                    <p>Seamless integration with ChatGPT, Claude, Bard, Perplexity, and all major AI chat platforms.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3>Privacy First</h3>
+                    <p>All data stored locally on your device. Your prompts and conversations stay completely private.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⌨️</span>
+                    <h3>Productivity Shortcuts</h3>
+                    <p>Keyboard shortcuts, context menus, and floating toolbars for lightning-fast prompt enhancement.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 style="text-align: center; font-size: 2.2em; margin-bottom: 40px;">How It Works</h2>
+            
+            <div class="setup-steps">
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.8em;">Get Started in 60 Seconds</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Install Extension</h4>
+                        <p>One-click install from Chrome Web Store. Immediately works with all AI sites.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Visit AI Site</h4>
+                        <p>Go to ChatGPT, Claude, or any supported AI platform. Prompter activates automatically.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Enhance Prompts</h4>
+                        <p>Click the floating button or use Ctrl+Shift+E to transform any prompt instantly.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Get Amazing Results</h4>
+                        <p>Watch as AI provides detailed, structured, and actionable responses to your enhanced prompts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3 style="font-size: 1.8em; margin-bottom: 20px;">See Prompter in Action</h3>
+                <p style="margin-bottom: 30px; font-size: 1.1em; color: #666;">Watch how Prompter transforms a basic prompt into a comprehensive instruction:</p>
+                <!-- In a real implementation, this would be an embedded video -->
+                <div class="demo-video" style="background: #f0f0f0; height: 400px; display: flex; align-items: center; justify-content: center; font-size: 1.2em; color: #666;">
+                    📹 Demo Video: "From Lazy to Powerful - 60 Second Transformation"
+                    <br><small>(Click to play interactive demo)</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 style="text-align: center; font-size: 2.2em; margin-bottom: 20px;">Choose Your Plan</h2>
+            <p style="text-align: center; font-size: 1.2em; color: #666; margin-bottom: 40px;">Start with a free trial, then choose the plan that works for you</p>
+
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Free Trial</h3>
+                    <div class="price">FREE<span>/15 days</span></div>
+                    <ul class="features-list">
+                        <li>Full access to all features</li>
+                        <li>Unlimited prompt enhancements</li>
+                        <li>Complete template library</li>
+                        <li>Personal prompt vault</li>
+                        <li>All AI platform support</li>
+                    </ul>
+                    <button class="cta-button" onclick="startTrial()">Start Free Trial</button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Monthly Plan</h3>
+                    <div class="price">$5<span>/month</span></div>
+                    <ul class="features-list">
+                        <li>Everything in Free Trial</li>
+                        <li>Unlimited usage forever</li>
+                        <li>Priority support</li>
+                        <li>Early access to new features</li>
+                        <li>Advanced templates</li>
+                    </ul>
+                    <button class="cta-button" onclick="subscribeMonthly()">Choose Monthly</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Lifetime Access</h3>
+                    <div class="price">$35<span>one-time</span></div>
+                    <ul class="features-list">
+                        <li>Everything in Monthly</li>
+                        <li>Lifetime access - no recurring fees</li>
+                        <li>All future updates included</li>
+                        <li>Premium support</li>
+                        <li>Best value - save $25+ annually</li>
+                    </ul>
+                    <button class="cta-button" onclick="buyLifetime()">Get Lifetime Access</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px;">Ready to Transform Your AI Experience?</h2>
+            <p style="font-size: 1.3em; color: #666; margin-bottom: 40px;">Join thousands of professionals already getting 10x better AI results</p>
+            
+            <a href="#" class="cta-button" onclick="startTrial()">Start Your Free Trial Now</a>
+            <a href="#" class="cta-button secondary" onclick="learnMore()">Watch Demo Video</a>
+            
+            <div style="margin-top: 40px; font-size: 1.1em; color: #666;">
+                ✅ 15-day free trial &nbsp;&nbsp;&nbsp; ✅ No credit card required &nbsp;&nbsp;&nbsp; ✅ Cancel anytime
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2024 Prompter Extension. Transform your AI conversations.</p>
+            <div class="social-links">
+                <a href="#" title="Twitter">🐦</a>
+                <a href="#" title="LinkedIn">💼</a>
+                <a href="#" title="YouTube">📺</a>
+                <a href="#" title="Support">💬</a>
+            </div>
+            <p><small>Privacy Policy • Terms of Service • Support</small></p>
+        </footer>
+    </div>
+
+    <script>
+        // Welcome page interaction scripts
+        function startTrial() {
+            // Track conversion event
+            if (chrome && chrome.runtime) {
+                chrome.runtime.sendMessage({
+                    action: 'trackEvent',
+                    eventName: 'trial_started_welcome',
+                    data: { source: 'welcome_page' }
+                });
+            }
+            
+            // Close welcome page and open extension popup
+            window.close();
+            
+            // Show success message
+            showNotification('Welcome to Prompter! Your 15-day trial has started. Visit any AI site to begin.', 'success');
+        }
+
+        function subscribeMonthly() {
+            // Track subscription intent
+            if (chrome && chrome.runtime) {
+                chrome.runtime.sendMessage({
+                    action: 'trackEvent',
+                    eventName: 'subscription_intent',
+                    data: { plan: 'monthly', source: 'welcome_page' }
+                });
+            }
+            
+            // In production, redirect to payment processor
+            window.open('https://your-payment-link.com/monthly', '_blank');
+        }
+
+        function buyLifetime() {
+            // Track subscription intent
+            if (chrome && chrome.runtime) {
+                chrome.runtime.sendMessage({
+                    action: 'trackEvent',
+                    eventName: 'subscription_intent',
+                    data: { plan: 'lifetime', source: 'welcome_page' }
+                });
+            }
+            
+            // In production, redirect to payment processor
+            window.open('https://your-payment-link.com/lifetime', '_blank');
+        }
+
+        function learnMore() {
+            // Track demo interest
+            if (chrome && chrome.runtime) {
+                chrome.runtime.sendMessage({
+                    action: 'trackEvent',
+                    eventName: 'demo_requested',
+                    data: { source: 'welcome_page' }
+                });
+            }
+            
+            // Play demo video or redirect to demo page
+            alert('Demo video would play here. For now, try the free trial!');
+        }
+
+        function showNotification(message, type) {
+            // Create and show notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#28a745' : '#dc3545'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Add CSS animation for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Track page view
+        if (chrome && chrome.runtime) {
+            chrome.runtime.sendMessage({
+                action: 'trackEvent',
+                eventName: 'welcome_page_viewed',
+                data: { timestamp: Date.now() }
+            });
+        }
+
+        // Add smooth scrolling to anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add intersection observer for animation triggers
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.feature-card, .step-card, .pricing-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

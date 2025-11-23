@@ -1,0 +1,89 @@
+{
+  "manifest_version": 3,
+  "name": "Prompter - AI Prompt Optimizer",
+  "version": "1.0.0",
+  "description": "Transform lazy prompts into powerful AI instructions. Get better results with smart prompt enhancement, templates, and your personal prompt library.",
+  
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "scripting"
+  ],
+  
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://bard.google.com/*",
+    "https://www.perplexity.ai/*",
+    "https://you.com/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://bard.google.com/*",
+        "https://www.perplexity.ai/*",
+        "https://you.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Prompter - Optimize Your AI Prompts",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  
+  "commands": {
+    "enhance-prompt": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Enhance current prompt"
+    },
+    "open-library": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Open prompt library"
+    },
+    "quick-template": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T",
+        "mac": "Command+Shift+T"
+      },
+      "description": "Insert quick template"
+    }
+  },
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*", "templates/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
