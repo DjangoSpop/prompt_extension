@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Temple - Your Wisdom Library</title>
+  <link rel="stylesheet" href="temple-styles.css">
+</head>
+<body>
+  <div id="temple-root">
+    <!-- Temple Header -->
+    <header class="temple-header">
+      <div class="temple-logo">
+        <div class="temple-icon">🏛️</div>
+        <div class="temple-title">
+          <h1>Prompt Temple</h1>
+          <p class="temple-subtitle">Your Wisdom Library</p>
+        </div>
+      </div>
+
+      <div class="temple-stats">
+        <div class="stat-item">
+          <span class="stat-value" id="wisdom-count">0</span>
+          <span class="stat-label">Wisdoms</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="credits-balance">0</span>
+          <span class="stat-label">Credits</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="temple-nav">
+      <button class="nav-tab active" data-view="library">
+        📚 Library
+      </button>
+      <button class="nav-tab" data-view="collections">
+        🗂️ Collections
+      </button>
+      <button class="nav-tab" data-view="archive">
+        📜 Archive
+      </button>
+      <button class="nav-tab" data-view="settings">
+        ⚙️ Settings
+      </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="temple-content">
+      <!-- Library View -->
+      <section id="library-view" class="temple-view active">
+        <!-- Search & Filters -->
+        <div class="wisdom-controls">
+          <div class="search-box">
+            <input
+              type="text"
+              id="wisdom-search"
+              placeholder="Search your wisdom..."
+              class="temple-input"
+            />
+            <button class="search-btn" id="search-wisdom-btn">🔍</button>
+          </div>
+
+          <div class="filter-row">
+            <select id="category-filter" class="temple-select">
+              <option value="">All Categories</option>
+              <option value="summary">📝 Summary</option>
+              <option value="creative">🎨 Creative</option>
+              <option value="analysis">📊 Analysis</option>
+              <option value="code">💻 Code</option>
+              <option value="translation">🌐 Translation</option>
+              <option value="other">📌 Other</option>
+            </select>
+
+            <select id="source-filter" class="temple-select">
+              <option value="">All Sources</option>
+              <option value="extension">🔌 Extension</option>
+              <option value="web">🌍 Web</option>
+              <option value="api">⚡ API</option>
+            </select>
+
+            <button class="filter-toggle" id="advanced-filters-toggle">
+              Advanced ▼
+            </button>
+          </div>
+
+          <!-- Advanced Filters (Hidden by default) -->
+          <div id="advanced-filters" class="advanced-filters hidden">
+            <div class="date-range">
+              <label class="filter-label">Date Range:</label>
+              <input type="date" id="date-from" class="temple-input-sm" />
+              <span>to</span>
+              <input type="date" id="date-to" class="temple-input-sm" />
+            </div>
+
+            <div class="tag-filter">
+              <label class="filter-label">Tags:</label>
+              <div id="tag-pills" class="tag-pills"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wisdom Grid -->
+        <div id="wisdom-grid" class="wisdom-grid">
+          <!-- Loading State -->
+          <div id="loading-state" class="state-message">
+            <div class="loader"></div>
+            <p>Loading your wisdom...</p>
+          </div>
+
+          <!-- Empty State -->
+          <div id="empty-state" class="state-message hidden">
+            <div class="empty-icon">🏛️</div>
+            <h3>Your Temple Awaits</h3>
+            <p>Begin your journey by creating your first wisdom entry.</p>
+            <button class="temple-btn primary" id="create-first-wisdom">
+              Create First Wisdom
+            </button>
+          </div>
+
+          <!-- Error State -->
+          <div id="error-state" class="state-message hidden error">
+            <div class="error-icon">⚠️</div>
+            <p id="error-message"></p>
+            <button class="temple-btn secondary" id="retry-load">Retry</button>
+          </div>
+
+          <!-- Wisdom Cards Container -->
+          <div id="wisdom-cards" class="wisdom-cards"></div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="temple-pagination">
+          <button class="page-btn" id="prev-page" disabled>← Previous</button>
+          <span class="page-info" id="page-info">Page 1</span>
+          <button class="page-btn" id="next-page">Next →</button>
+        </div>
+      </section>
+
+      <!-- Collections View -->
+      <section id="collections-view" class="temple-view hidden">
+        <div class="collections-header">
+          <h2>Your Collections</h2>
+          <button class="temple-btn primary" id="create-collection">
+            + New Collection
+          </button>
+        </div>
+        <div id="collections-grid" class="collections-grid"></div>
+      </section>
+
+      <!-- Archive View -->
+      <section id="archive-view" class="temple-view hidden">
+        <div class="archive-header">
+          <h2>Wisdom Archive</h2>
+          <p class="archive-subtitle">Browse your complete wisdom history</p>
+        </div>
+        <div id="archive-timeline" class="archive-timeline"></div>
+      </section>
+
+      <!-- Settings View -->
+      <section id="settings-view" class="temple-view hidden">
+        <div class="settings-container">
+          <h2>Temple Settings</h2>
+
+          <div class="settings-section">
+            <h3>🔐 Authentication</h3>
+            <div class="setting-item">
+              <label>API Endpoint:</label>
+              <input type="text" id="api-endpoint" class="temple-input"
+                     placeholder="https://api.prompt-temple.com" />
+            </div>
+            <div class="setting-item">
+              <button class="temple-btn secondary" id="connect-account">
+                Connect Account
+              </button>
+              <button class="temple-btn danger" id="disconnect-account">
+                Disconnect
+              </button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>⚡ Enhancement</h3>
+            <div class="setting-item">
+              <label>Default Model:</label>
+              <select id="default-model" class="temple-select">
+                <option value="gpt-4o-mini">GPT-4o Mini</option>
+                <option value="gpt-4o">GPT-4o</option>
+                <option value="claude-3-5-haiku-20241022">Claude 3.5 Haiku</option>
+                <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option>
+              </select>
+            </div>
+            <div class="setting-item">
+              <label>Default Style:</label>
+              <select id="default-style" class="temple-select">
+                <option value="balanced">Balanced</option>
+                <option value="concise">Concise</option>
+                <option value="detailed">Detailed</option>
+                <option value="creative">Creative</option>
+                <option value="technical">Technical</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>🎨 Appearance</h3>
+            <div class="setting-item">
+              <label>
+                <input type="checkbox" id="compact-view" />
+                Compact Card View
+              </label>
+            </div>
+            <div class="setting-item">
+              <label>
+                <input type="checkbox" id="show-preview" checked />
+                Show Prompt Previews
+              </label>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>💳 Credits & Billing</h3>
+            <div class="credit-info">
+              <p>Current Balance: <strong id="settings-credits">0 credits</strong></p>
+              <button class="temple-btn primary" id="purchase-credits">
+                Purchase Credits
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button class="fab" id="quick-create" title="Quick Create (Ctrl+Shift+N)">
+      ✨
+    </button>
+  </div>
+
+  <!-- Modals -->
+  <!-- Wisdom Detail Modal -->
+  <div id="wisdom-modal" class="temple-modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2 id="wisdom-modal-title">Wisdom Details</h2>
+        <button class="modal-close" id="close-wisdom-modal">×</button>
+      </div>
+      <div class="modal-body" id="wisdom-modal-body"></div>
+      <div class="modal-footer" id="wisdom-modal-footer"></div>
+    </div>
+  </div>
+
+  <!-- Enhancement Modal -->
+  <div id="enhance-modal" class="temple-modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2>✨ Enhance Wisdom</h2>
+        <button class="modal-close" id="close-enhance-modal">×</button>
+      </div>
+      <div class="modal-body" id="enhance-modal-body"></div>
+      <div class="modal-footer" id="enhance-modal-footer"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="temple-app.js" type="module"></script>
+</body>
+</html>
