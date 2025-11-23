@@ -1,14 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Prompter - AI Prompt Optimizer",
-  "version": "1.0.0",
-  "description": "Transform lazy prompts into powerful AI instructions. Get better results with smart prompt enhancement, templates, and your personal prompt library.",
-  
+  "name": "Prompt Temple - Your Wisdom Library",
+  "version": "2.0.0",
+  "description": "Your temple of prompt wisdom. Curate, enhance, and access your professional prompt library with AI-powered optimization and credit-based enhancement.",
+
   "permissions": [
     "storage",
     "activeTab",
     "contextMenus",
-    "scripting"
+    "scripting",
+    "sidePanel"
   ],
   
   "host_permissions": [
@@ -38,9 +39,13 @@
     }
   ],
   
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Prompter - Optimize Your AI Prompts",
+    "default_title": "Prompt Temple - Open Your Wisdom Library",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",
@@ -57,12 +62,12 @@
       },
       "description": "Enhance current prompt"
     },
-    "open-library": {
+    "open-temple": {
       "suggested_key": {
         "default": "Ctrl+Shift+L",
         "mac": "Command+Shift+L"
       },
-      "description": "Open prompt library"
+      "description": "Open Wisdom Temple (Side Panel)"
     },
     "quick-template": {
       "suggested_key": {

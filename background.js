@@ -162,7 +162,7 @@ class PrompterBackground {
 
             chrome.contextMenus.create({
                 id: 'open-library',
-                title: 'Open Prompt Library 📚',
+                title: 'Open Wisdom Temple 🏛️',
                 contexts: ['all'],
                 documentUrlPatterns: [
                     'https://chat.openai.com/*',
@@ -219,22 +219,28 @@ class PrompterBackground {
 
     async handleCommand(command) {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        
-        if (!this.isAISite(tab.url)) {
-            this.showNotification('Please navigate to an AI chat website first');
-            return;
-        }
 
         switch (command) {
             case 'enhance-prompt':
-                chrome.tabs.sendMessage(tab.id, { 
-                    action: 'enhanceCurrentPrompt' 
+                if (!this.isAISite(tab.url)) {
+                    this.showNotification('Please navigate to an AI chat website first');
+                    return;
+                }
+                chrome.tabs.sendMessage(tab.id, {
+                    action: 'enhanceCurrentPrompt'
                 });
                 this.trackEvent('keyboard_shortcut_used', { command });
                 break;
 
+            case 'open-temple':
+                // Open the Wisdom Temple side panel
+                await chrome.sidePanel.open({ windowId: tab.windowId });
+                this.trackEvent('keyboard_shortcut_used', { command: 'open-temple' });
+                break;
+
             case 'open-library':
-                chrome.action.openPopup();
+                // Legacy support - now opens side panel
+                await chrome.sidePanel.open({ windowId: tab.windowId });
                 this.trackEvent('keyboard_shortcut_used', { command });
                 break;
 
@@ -288,7 +294,8 @@ class PrompterBackground {
                 break;
 
             case 'open-library':
-                chrome.action.openPopup();
+                // Open the Wisdom Temple side panel
+                await chrome.sidePanel.open({ windowId: tab.windowId });
                 break;
         }
     }
